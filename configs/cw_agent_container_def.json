@@ -1,0 +1,55 @@
+[
+  {
+    "name": "cloudwatch-agent",
+    "image": "amazon/cloudwatch-agent:latest",
+    "cpu": 128,
+    "memory": 128,
+    "environment": [
+      {
+        "name": "USE_DEFAULT_CONFIG",
+        "value": "True"
+      }
+    ],
+    "mountPoints": [
+      {
+        "readOnly": true,
+        "containerPath": "/rootfs/proc",
+        "sourceVolume": "proc"
+      },
+      {
+        "readOnly": true,
+        "containerPath": "/rootfs/dev",
+        "sourceVolume": "dev"
+      },
+      {
+        "readOnly": true,
+        "containerPath": "/sys/fs/cgroup",
+        "sourceVolume": "al2_cgroup"
+      },
+      {
+        "readOnly": true,
+        "containerPath": "/cgroup",
+        "sourceVolume": "al1_cgroup"
+      },
+      {
+        "readOnly": true,
+        "containerPath": "/rootfs/sys/fs/cgroup",
+        "sourceVolume": "al2_cgroup"
+      },
+      {
+        "readOnly": true,
+        "containerPath": "/rootfs/cgroup",
+        "sourceVolume": "al1_cgroup"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-create-group": "True",
+        "awslogs-stream-prefix": "ecs",
+        "awslogs-group": "/ecs/${cluster_name}-cw-agent",
+        "awslogs-region": "${region}"
+      }
+    }
+  }
+]
