@@ -47,7 +47,7 @@
       "options": {
         "awslogs-create-group": "True",
         "awslogs-stream-prefix": "ecs",
-        "awslogs-group": "/ecs/${cluster_name}-cw-agent",
+        "awslogs-group": "/ecs/${cluster_name}/cw-agent",
         "awslogs-region": "${region}"
       }
     }
