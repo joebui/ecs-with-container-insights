@@ -31,7 +31,7 @@ resource "aws_autoscaling_group" "ecs" {
   desired_capacity_type     = "units"
   max_size                  = 2
   min_size                  = 1
-  vpc_zone_identifier       = data.aws_subnets.public.ids
+  vpc_zone_identifier       = data.aws_subnets.subnets.ids
   capacity_rebalance        = true
   wait_for_capacity_timeout = "0"
   termination_policies      = ["OldestLaunchTemplate", "OldestInstance"]
@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "ecs" {
       }
 
       override {
-        instance_type     = "t4g.small"
+        instance_type     = var.instance_type
         weighted_capacity = "1"
       }
     }

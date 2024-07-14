@@ -30,7 +30,7 @@ data "aws_vpc" "default" {
   }
 }
 
-data "aws_subnets" "public" {
+data "aws_subnets" "subnets" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
